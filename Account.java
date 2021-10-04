@@ -2,9 +2,8 @@ package com.bank;
 
 public abstract class Account {
 	
-	private double minimumBalance = 100;
-	private static double principle=250;
-	static double balance;
+	private double MINIMUM_BALANCE = 100;
+	private static double balance=250;
 
 	public static double getBalance() {
 		return balance;
@@ -14,21 +13,13 @@ public abstract class Account {
 		Account.balance = balance;
 	}
 
-	public double getMinimumBalance() {
-		return minimumBalance;
+	public double getMINIMUM_BALANCE() {
+		return MINIMUM_BALANCE;
 	}
 
-	public static double getPrinciple() {
-		return principle;
-	}
-	
-	public static void setPrinciple(double principle) {
-		Account.principle = principle;
-	}
-
-	boolean isValidTransaction(double principle,int amount) {
-		double remainder=principle-amount;
-		if(remainder>=minimumBalance)
+	boolean isValidTransaction(double balance,double amount) {
+		double remainder=balance-amount;
+		if(remainder>=MINIMUM_BALANCE)
 			return true;
 		else
 			return false;	
@@ -39,8 +30,6 @@ public abstract class Account {
 	return balance;
 	}
 	
-	double balance(double principle) {
-		return principle;
-	}
-	
+	abstract double balance(double principle);
+		
 }
