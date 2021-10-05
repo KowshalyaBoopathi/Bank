@@ -6,7 +6,19 @@ public class ATMCard {
 	
 	public static void main(String[] args) {
 		
+		double principle, balance, minimumBalance = 0;
+		
 		Scanner sc=new Scanner(System.in);
+		
+		//Create object for all cases here using down casting 
+		
+		Account account = new CashDispense();
+		CashDispense cash=(CashDispense)account;
+		
+		Account account1 = new SwipeShopping();
+		SwipeShopping shop=(SwipeShopping)account1;
+		
+		//loop to run the program continuously
 		
 		while(true) {
 		
@@ -22,51 +34,44 @@ public class ATMCard {
 		switch(choice) {
 		
 		case 1:
-			Account one=new CashDispense();
 			
-			double principle=Account.getBalance();
+			principle=Account.getBalance();
 			
 			System.out.println("Deposit ");
 			int deposit = sc.nextInt();
 			
-			double balance=one.deposit(principle, deposit);
-			/*Account.setBalance(principle);			
-			double balance = one.balance(principle);
-			principle=balance;*/
+			balance=cash.deposit(principle, deposit);
 			Account.setBalance(balance);
 			System.out.println("Balance USD "+balance);
 			
 			break;
 		case 2:
-			/*principle=Account.getBalance();
-			balance=one1.balance(principle);
-			principle=balance;*/
-			balance=Account.getBalance();
+
+			balance=Account.getBalance();//any class type is fine
 			System.out.println("Balance USD "+balance);
 			
 			break;
 		case 3:
-			CashDispense acc=new CashDispense();
-
+	
 			System.out.println("Enter your ATM card Number");
 			int number=sc.nextInt();
 			
 			String str=Integer.toString(number);
 			String str1=Account.getNumber();
 			
-			if(acc.isValidNumber(str,str1)) {
+			if(cash.isValidNumber(str,str1)) {
 			
 			principle=Account.getBalance();
-			double minimumBalance=Account.getMINIMUM_BALANCE();
+			minimumBalance=Account.getMINIMUM_BALANCE();
 			
 			System.out.println("Enter amount");
 			int amount=sc.nextInt();
 
-			if(acc.dispenseCash(amount)) {
-				double charges=acc.chargedAmount(amount);
-				balance=acc.balance(principle,amount,charges);
+			if(cash.dispenseCash(amount)) {
+				double charges=cash.chargedAmount(amount);
+				balance=cash.balance(principle,amount,charges);
 				
-				if(acc.isValidTransaction(balance, minimumBalance)) {
+				if(cash.isValidTransaction(balance, minimumBalance)) {
 					System.out.println("Charges USD "+charges);
 					Account.setBalance(balance);
 					System.out.println("Balance USD "+balance);	
@@ -74,12 +79,11 @@ public class ATMCard {
 				else 
 					System.out.println("Insufficient Minimum Balance");			
 			}
+			}
 			else
 				System.out.println("Invlaid Card NUmber");
-			}
 			break;
 		case 4:
-			SwipeShopping ss=new SwipeShopping();
 			
 			System.out.println("Enter your ATM card Number");
 			number=sc.nextInt();
@@ -87,17 +91,17 @@ public class ATMCard {
 			str=Integer.toString(number);
 			str1=Account.getNumber();
 			
-			if(ss.isValidNumber(str,str1)) {
+			if(shop.isValidNumber(str,str1)) {
 			
 			principle=Account.getBalance();
 			
 			System.out.println("Enter amount");
 			int amount1=sc.nextInt();
 
-			double cashback=ss.cashBack(amount1);
-			balance=ss.balance(principle, amount1, cashback);
+			double cashback=shop.cashBack(amount1);
+			balance=shop.balance(principle, amount1, cashback);
 			
-			if(ss.isValidTransaction(principle, amount1)) {
+			if(shop.isValidTransaction(balance, minimumBalance)) {
 				System.out.println("Cashback USD "+cashback);
 				Account.setBalance(balance);
 				System.out.println("Balance USD "+balance);
