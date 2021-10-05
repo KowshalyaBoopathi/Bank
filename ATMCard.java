@@ -47,8 +47,17 @@ public class ATMCard {
 			break;
 		case 3:
 			CashDispense acc=new CashDispense();
+
+			System.out.println("Enter your ATM card Number");
+			int number=sc.nextInt();
+			
+			String str=Integer.toString(number);
+			String str1=Account.getNumber();
+			
+			if(acc.isValidNumber(str,str1)) {
 			
 			principle=Account.getBalance();
+			double minimumBalance=Account.getMINIMUM_BALANCE();
 			
 			System.out.println("Enter amount");
 			int amount=sc.nextInt();
@@ -57,7 +66,7 @@ public class ATMCard {
 				double charges=acc.chargedAmount(amount);
 				balance=acc.balance(principle,amount,charges);
 				
-				if(acc.isValidTransaction(principle, amount)) {
+				if(acc.isValidTransaction(balance, minimumBalance)) {
 					System.out.println("Charges USD "+charges);
 					Account.setBalance(balance);
 					System.out.println("Balance USD "+balance);	
@@ -65,9 +74,20 @@ public class ATMCard {
 				else 
 					System.out.println("Insufficient Minimum Balance");			
 			}
+			else
+				System.out.println("Invlaid Card NUmber");
+			}
 			break;
 		case 4:
 			SwipeShopping ss=new SwipeShopping();
+			
+			System.out.println("Enter your ATM card Number");
+			number=sc.nextInt();
+			
+			str=Integer.toString(number);
+			str1=Account.getNumber();
+			
+			if(ss.isValidNumber(str,str1)) {
 			
 			principle=Account.getBalance();
 			
@@ -83,7 +103,10 @@ public class ATMCard {
 				System.out.println("Balance USD "+balance);
 			}
 			else
-				System.out.println("Insufficient Minimum Balance");			
+				System.out.println("Insufficient Minimum Balance");	
+			}
+			else
+				System.out.println("Invlaid Card NUmber");
 			break;
 		case 5:
 			System.exit(0);

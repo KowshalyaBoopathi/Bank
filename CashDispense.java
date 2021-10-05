@@ -30,12 +30,12 @@ public class CashDispense extends Account {
 		double balance=principle-amount-charges;
 		return balance;	
 	}
-}
 	
-	/*boolean isValidTransaction(double balance, double minimumBalance) {
+	boolean isValidTransaction(double balance, double minimumBalance) {
 		if(balance>=minimumBalance)
 			return true;
 		else
 			return false;	
-	}*/
+	}
+}
 
